@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <title>Trang quản lý sách</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><b>NEKO Project</b></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://github.com/TrHgTung/Django-demo"
+                target="_blank"
+                >Mã nguồn</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">Giới thiệu</a>
+            </li>
+          </ul>
+          <a
+            href="https://vi.wikipedia.org/wiki/Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_S%C6%B0_ph%E1%BA%A1m_Th%C3%A0nh_ph%E1%BB%91_H%E1%BB%93_Ch%C3%AD_Minh"
+            target="_blank"
+            ><img
+              src="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png"
+              width="100px"
+          /></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2 class="text-center fw-bold mt-5">Trình quản lý kho sách</h2>
+      <p class="text-center fw-light">
+        Công cụ quản lý sách "hơi" chuyên nghiệp
+      </p>
+    </div>
+
+    <div class="container mt-3 bg-light">
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="text-center fw-bold mt-2">Form thêm sách</h4>
+          <form action="/insert" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="">Nhập tên sách</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Nhập tên sách"
+                required
+                id=""
+              />
+            </div>
+
+            <div class="form-group mt-2">
+              <label for="">Nhập mô tả sách</label>
+              <input
+                type="text"
+                class="form-control"
+                name="desc"
+                placeholder="Nhập mô tả sách"
+                required
+                id=""
+              />
+            </div>
+
+            <div class="form-group mt-2">
+              <label for="">Nhập ngày phát hành sách</label>
+              <input
+                type="date"
+                class="form-control"
+                name="date"
+                placeholder="Nhập ngày phát hành sách"
+                required
+                id=""
+              />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="provider">Chọn NXB sách:</label>
+              <select name="provider" id="provider" class="form-control">
+                <option selected>--- Chọn 1 nhà xuất bản ---</option>
+                <option value="KimDong">NXB Kim Đồng</option>
+                <option value="GiaoDuc">NXB Giáo Dục</option>
+                <option value="Tre">NXB Trẻ</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="category">Chọn danh mục sách:</label>
+              <select name="category" id="category" class="form-control">
+                <option selected>--- Chọn 1 danh mục ---</option>
+                <option value="TruyenTranh">Truyện tranh</option>
+                <option value="SGK">Sách giáo khoa</option>
+                <option value="GiaoTrinh">Giáo trình</option>
+                <option value="Truyen">Truyện đọc</option>
+                <option value="SachKhoaHoc">Sách khoa học</option>
+                <option value="Others">Khác</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4 text-center">
+              Thêm sản phẩm này
+            </button>
+          </form>
+        </div>
+        <div class="col-md-8" id="printable_div_id">
+          <h4 class="text-center fw-bold mt-2">Hiển thị thông tin sách</h4>
+          {% for message in messages %}
+          <div
+            class="alert alert-{{message.tags}} alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{{message}}</strong>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên sách</th>
+                <th scope="col">Mô tả sách</th>
+                <th scope="col">Ngày xuất bản</th>
+                <th scope="col">Nhà xuất bản</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Thao tác sửa</th>
+                <th scope="col">Thao tác xóa</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+              <tr>
+                <th scope="row">{{d.id}}</th>
+                <td>{{d.name}}</td>
+                <td>{{d.desc}}</td>
+                <td>{{d.date}}</td>
+                <td>{{d.provider}}</td>
+                <td>{{d.category}}</td>
+                <td>
+                  <a href="/update/{{d.id}}" class="btn btn-outline-success"
+                    >Sửa</a
+                  >
+                </td>
+                <td>
+                  <a href="/delete/{{d.id}}" class="btn btn-outline-danger"
+                    >Xóa</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="text-center btn btn-primary" onClick="printdiv('printable_div_id');">In danh sách</button>
+
+      <script>
+        function printdiv(elem) {
+          var header_str = '<html><head><title>' + document.title  + '</title></head><body>';
+          var footer_str = '</body></html>';
+          var new_str = document.getElementById(elem).innerHTML;
+          var old_str = document.body.innerHTML;
+          document.body.innerHTML = header_str + new_str + footer_str;
+          window.print();
+          document.body.innerHTML = old_str;
+          return false;
+        }
+        </script>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
