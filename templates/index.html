@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -189,12 +188,18 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="text-center btn btn-primary" onClick="printdiv('printable_div_id');">In danh sách</button>
+      <button
+        class="text-center btn btn-primary"
+        onClick="printdiv('printable_div_id');"
+      >
+        In danh sách
+      </button>
 
       <script>
         function printdiv(elem) {
-          var header_str = '<html><head><title>' + document.title  + '</title></head><body>';
-          var footer_str = '</body></html>';
+          var header_str =
+            "<html><head><title>" + document.title + "</title></head><body>";
+          var footer_str = "</body></html>";
           var new_str = document.getElementById(elem).innerHTML;
           var old_str = document.body.innerHTML;
           document.body.innerHTML = header_str + new_str + footer_str;
@@ -202,7 +207,7 @@
           document.body.innerHTML = old_str;
           return false;
         }
-        </script>
+      </script>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -221,4 +226,3 @@
     -->
   </body>
 </html>
-
