@@ -73,8 +73,8 @@
     </nav>
 
     <div class="container">
-        <h2 class="text-center fw-bold mt-5">Chỉnh sửa thông tin sản phẩm</h2>
-        <p>Đang chỉnh sửa thông tin của {{d.name}}</p>
+      <h2 class="text-center fw-bold mt-5">Chỉnh sửa thông tin sản phẩm</h2>
+      <p>Đang chỉnh sửa thông tin của sản phẩm {{d.name}}</p>
     </div>
 
     <div class="container mt-3 bg-light">
@@ -88,8 +88,8 @@
                 type="text"
                 class="form-control"
                 name="name"
-                placeholder="Nhập tên sách"
-                value={{d.name}}
+                placeholder="Nhập tên sản phẩm"
+                value="{{d.name}}"
                 id=""
               />
             </div>
@@ -100,7 +100,7 @@
                 type="text"
                 class="form-control"
                 name="desc"
-                placeholder="Nhập mô tả sách"
+                placeholder="Nhập mô tả sản phẩm"
                 value="{{d.desc}}"
                 id=""
               />
@@ -113,17 +113,19 @@
                 class="form-control"
                 name="date"
                 placeholder="Nhập ngày phát hành sách"
-                value={{d.date}}
+                value="{{d.date}}"
                 id=""
               />
             </div>
 
             <div class="form-group col-md-4">
-              <label for="provider">Chọn lại NXB sách:</label>
+              <label for="provider">Chọn lại NXB/NCC:</label>
               <select name="provider" id="provider" class="form-control">
                 <option selected>{{d.provider}}</option>
                 <option value="KimDong">NXB Kim Đồng</option>
                 <option value="GiaoDuc">NXB Giáo Dục</option>
+                <option value="ThienLong">Cty Thiên long</option>
+                <option value="hoabinh">Cty Hòa Bình</option>
                 <option value="Tre">NXB Trẻ</option>
               </select>
             </div>
@@ -136,6 +138,7 @@
                 <option value="SGK">Sách giáo khoa</option>
                 <option value="GiaoTrinh">Giáo trình</option>
                 <option value="Truyen">Truyện đọc</option>
+                <option value="dungcu">Dụng cụ học tập</option>
                 <option value="SachKhoaHoc">Sách khoa học</option>
                 <option value="Others">Khác</option>
               </select>
@@ -144,23 +147,13 @@
             <button type="submit" class="btn btn-primary">Cập nhật sách</button>
           </form>
         </div>
-       
       </div>
     </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
   </body>
 </html>
