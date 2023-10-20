@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -111,6 +110,8 @@
                 <option selected>--- Chọn 1 nhà xuất bản ---</option>
                 <option value="KimDong">NXB Kim Đồng</option>
                 <option value="GiaoDuc">NXB Giáo Dục</option>
+                <option value="ThienLong">Cty Thiên long</option>
+                <option value="hoabinh">Cty Hòa Bình</option>
                 <option value="Tre">NXB Trẻ</option>
               </select>
             </div>
@@ -123,6 +124,7 @@
                 <option value="SGK">Sách giáo khoa</option>
                 <option value="GiaoTrinh">Giáo trình</option>
                 <option value="Truyen">Truyện đọc</option>
+                <option value="dungcu">Dụng cụ học tập</option>
                 <option value="SachKhoaHoc">Sách khoa học</option>
                 <option value="Others">Khác</option>
               </select>
@@ -189,12 +191,18 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="text-center btn btn-primary" onClick="printdiv('printable_div_id');">In danh sách</button>
+      <button
+        class="text-center btn btn-primary"
+        onClick="printdiv('printable_div_id');"
+      >
+        In danh sách
+      </button>
 
       <script>
         function printdiv(elem) {
-          var header_str = '<html><head><title>' + document.title  + '</title></head><body>';
-          var footer_str = '</body></html>';
+          var header_str =
+            "<html><head><title>" + document.title + "</title></head><body>";
+          var footer_str = "</body></html>";
           var new_str = document.getElementById(elem).innerHTML;
           var old_str = document.body.innerHTML;
           document.body.innerHTML = header_str + new_str + footer_str;
@@ -202,7 +210,7 @@
           document.body.innerHTML = old_str;
           return false;
         }
-        </script>
+      </script>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -221,4 +229,3 @@
     -->
   </body>
 </html>
-
