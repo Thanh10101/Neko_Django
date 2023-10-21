@@ -1,4 +1,3 @@
-
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from .models import Book
@@ -19,8 +18,11 @@ def insertData(request):
         print(name,desc,date,provider,category)
         query=Book(name=name,desc=desc,date=date,provider=provider,category=category)
         query.save()
-        # chuc nang thong bao sau khi nhap thanh cong san pham
-        messages.info(request,"Dữ liệu sách đã được nhập vào")
+        # Hien thi thong bao
+        msg_insert = "Dữ liệu sách đã được nhập vào"
+        messages.info(request, msg_insert)
+        # messages.error(request,"Dữ liệu sách đã được nhập vào")
+    # return render(request,"index.html")
     return HttpResponseRedirect('/')
 
 def updateData(request,id):
@@ -38,20 +40,25 @@ def updateData(request,id):
         edit.provider = provider
         edit.category = category
         edit.save()
-        # chuc nang thong bao sau khi cap nhat (thay doi) thanh cong san pham
-        messages.warning(request,"Dữ liệu sách đã được thay đổi")
+
+        msg_upd = "Dữ liệu sách đã được thay đổi"
+        messages.warning(request,msg_upd)
+        # messages.error(request,"Dữ liệu sách đã được thay đổi")
         return redirect("/")
 
     d = Book.objects.get(id=id)
     context = {"d" : d}
     return render(request,"edit.html",context)
+    # return HttpResponseRedirect('/')
 
 def deleteData(request,id):
     d = Book.objects.get(id=id)
     d.delete()
-    # chuc nang thong bao sau khi xoa thanh cong san pham
-    messages.error(request,"Dữ liệu sách đã được xóa")
+    # Thong bao da xoa san pham thanh cong
+    msg_del = "Dữ liệu sách đã được xóa"
+    messages.error(request, msg_del)
     return redirect("/")
+    # return HttpResponseRedirect('/')
 
 def about(request):
     return render(request,"about.html")
